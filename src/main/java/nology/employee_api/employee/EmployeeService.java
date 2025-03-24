@@ -31,4 +31,17 @@ public class EmployeeService {
         Employee newEmployee = mapper.map(data, Employee.class);
         return this.repo.save(newEmployee);
     }
+
+    public void deleteEmployeeById(Long id) {
+        Optional<Employee> foundEmployee = getById(id);
+        if (foundEmployee != null) {
+            this.repo.deleteById(id);
+        }
+    }
+
+    public void updateEmployee(UpdateEmployeeDTO data, Long id) {
+        Employee foundEmployee = this.repo.findById(id).get();
+        mapper.map(data, foundEmployee);
+        this.repo.save(foundEmployee);
+    }
 }

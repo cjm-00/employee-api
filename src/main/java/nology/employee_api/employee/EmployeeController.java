@@ -11,7 +11,9 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +48,18 @@ public class EmployeeController {
     public ResponseEntity<Employee> createEmployee(@RequestBody @Valid CreateEmployeeDTO data) {
         Employee newEmployee = this.employeeService.createEmployee(data);
         return new ResponseEntity<Employee>(newEmployee, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployeeById(@PathVariable Long id) {
+        employeeService.deleteEmployeeById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/{id}/edit")
+    public ResponseEntity<Void> updateEmployee(@PathVariable Long id, @RequestBody @Valid UpdateEmployeeDTO data) {
+        employeeService.updateEmployee(data, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
