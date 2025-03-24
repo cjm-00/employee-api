@@ -11,16 +11,16 @@ import jakarta.persistence.Table;
 public class Employee {
 
     public enum Gender {
-        FEMALE,
-        MALE,
-        OTHER,
-        NA
+        Female,
+        Male,
+        Other,
+        Na
     }
 
     public enum ContractType {
         PT,
         FT,
-        CASUAL
+        CT
     }
 
     @Id
